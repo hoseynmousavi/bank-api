@@ -13,7 +13,6 @@ function saveFile({file, res})
             {
                 if (err)
                 {
-                    console.log(err)
                     createErrorText({res, status: 400, message: respondTextConstant.error.fileSave, detail: err})
                 }
                 else
