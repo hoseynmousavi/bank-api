@@ -10,6 +10,7 @@ const bankCL = mongoose.model("bank", bankModel)
 function getList(req, res)
 {
     const {_id} = req?.params ?? {}
+    console.log(req?.params)
     if (_id)
     {
         bankCL.findOne({is_deleted: false, _id})
