@@ -28,7 +28,7 @@ function addItem(req, res)
         saveFile({file: logo, res})
             .then(logo =>
             {
-                const newItem = new bankCL({...req.body, logo})
+                const newItem = new bankCL({...req.body, logo, score_chart: JSON.parse(req.body.score_chart)})
                 newItem.save((err, data) =>
                 {
                     if (err)
