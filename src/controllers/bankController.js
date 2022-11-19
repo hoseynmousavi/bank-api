@@ -22,10 +22,10 @@ function getList(req, res)
 
 function addItem(req, res)
 {
-    const file = req.files?.file
-    if (file)
+    const logo = req.files?.logo
+    if (logo)
     {
-        saveFile({file, res})
+        saveFile({file: logo, res})
             .then(logo =>
             {
                 const newItem = new bankCL({...req.body, logo})
