@@ -44,7 +44,7 @@ const bankModel = new schema({
         required: true,
     },
     score_chart: {
-        type: [{name: String, score: Number}],
+        type: Array,
         required: true,
     },
     is_deleted: {
