@@ -4,6 +4,7 @@ import fileUpload from "express-fileupload"
 import mongoose from "mongoose"
 import data from "./data"
 import bankRouter from "./routes/bankRouter"
+import indicatorRouter from "./routes/indicatorRouter"
 import fileRouter from "./routes/fileRouter"
 import notFoundRouter from "./routes/notFoundRouter"
 
@@ -17,6 +18,7 @@ mongoose.Promise = global.Promise
 mongoose.connect(data.connectServerDb, null, () => console.log("connected to db"))
 
 bankRouter(app)
+indicatorRouter(app)
 fileRouter(app, __dirname)
 notFoundRouter(app)
 
