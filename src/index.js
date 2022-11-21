@@ -7,6 +7,7 @@ import bankRouter from "./routes/bankRouter"
 import indicatorRouter from "./routes/indicatorRouter"
 import fileRouter from "./routes/fileRouter"
 import notFoundRouter from "./routes/notFoundRouter"
+import bankIndicatorRouter from "./routes/bankIndicatorRouter"
 
 const app = express()
 app.use(cors())
@@ -19,6 +20,7 @@ mongoose.connect(data.connectServerDb, null, () => console.log("connected to db"
 
 bankRouter(app)
 indicatorRouter(app)
+bankIndicatorRouter(app)
 fileRouter(app, __dirname)
 notFoundRouter(app)
 

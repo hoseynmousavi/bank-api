@@ -16,7 +16,7 @@ const indicatorModel = new schema({
         required: true,
     },
     weight: {
-        type: String,
+        type: Number,
         required: true,
     },
     is_audited: {

@@ -8,31 +8,15 @@ const indicatorCL = mongoose.model("indicator", indicatorModel)
 
 function getList(req, res)
 {
-    const {_id} = req?.query ?? {}
-    if (_id)
-    {
-        indicatorCL.findOne({is_deleted: false, _id})
-            .then(data =>
-            {
-                createSuccessRespond({res, data})
-            })
-            .catch(err =>
-            {
-                createErrorText({res, status: 400, message: respondTextConstant.error.getData, detail: err})
-            })
-    }
-    else
-    {
-        indicatorCL.find({is_deleted: false})
-            .then(data =>
-            {
-                createSuccessRespond({res, data})
-            })
-            .catch(err =>
-            {
-                createErrorText({res, status: 400, message: respondTextConstant.error.getData, detail: err})
-            })
-    }
+    indicatorCL.find({is_deleted: false})
+        .then(data =>
+        {
+            createSuccessRespond({res, data})
+        })
+        .catch(err =>
+        {
+            createErrorText({res, status: 400, message: respondTextConstant.error.getData, detail: err})
+        })
 }
 
 function addItem(req, res)

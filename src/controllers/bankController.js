@@ -9,31 +9,15 @@ const bankCL = mongoose.model("bank", bankModel)
 
 function getList(req, res)
 {
-    const {_id} = req?.query ?? {}
-    if (_id)
-    {
-        bankCL.findOne({is_deleted: false, _id})
-            .then(data =>
-            {
-                createSuccessRespond({res, data})
-            })
-            .catch(err =>
-            {
-                createErrorText({res, status: 400, message: respondTextConstant.error.getData, detail: err})
-            })
-    }
-    else
-    {
-        bankCL.find({is_deleted: false})
-            .then(data =>
-            {
-                createSuccessRespond({res, data})
-            })
-            .catch(err =>
-            {
-                createErrorText({res, status: 400, message: respondTextConstant.error.getData, detail: err})
-            })
-    }
+    bankCL.find({is_deleted: false})
+        .then(data =>
+        {
+            createSuccessRespond({res, data})
+        })
+        .catch(err =>
+        {
+            createErrorText({res, status: 400, message: respondTextConstant.error.getData, detail: err})
+        })
 }
 
 function addItem(req, res)

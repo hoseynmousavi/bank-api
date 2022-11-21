@@ -19,10 +19,6 @@ const bankModel = new schema({
         type: Number,
         required: true,
     },
-    total_score: {
-        type: Number,
-        required: true,
-    },
     deposit_amount: {
         type: Number,
         required: true,
@@ -41,10 +37,6 @@ const bankModel = new schema({
     },
     branches_number: {
         type: Number,
-        required: true,
-    },
-    score_chart: {
-        type: Array,
         required: true,
     },
     is_deleted: {
