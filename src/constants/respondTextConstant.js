@@ -9,6 +9,8 @@ const respondTextConstant = {
         fileSave: "سرور در ذخیره فایل به مشکل خورد، مجددا تلاش کنید",
 
         routeNotFound: "route not found",
+
+        loginFailed: "کاربری با اطلاعات ارسالی یافت نشد",
     },
 }
 

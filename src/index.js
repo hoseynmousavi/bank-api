@@ -3,6 +3,7 @@ import cors from "cors"
 import fileUpload from "express-fileupload"
 import mongoose from "mongoose"
 import data from "./data"
+import userRouter from "./routes/userRouter"
 import bankRouter from "./routes/bankRouter"
 import indicatorRouter from "./routes/indicatorRouter"
 import fileRouter from "./routes/fileRouter"
@@ -18,6 +19,7 @@ app.use(express.urlencoded({extended: false}))
 mongoose.Promise = global.Promise
 mongoose.connect(data.connectServerDb, null, () => console.log("connected to db"))
 
+userRouter(app)
 bankRouter(app)
 indicatorRouter(app)
 bankIndicatorRouter(app)

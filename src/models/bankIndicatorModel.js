@@ -11,10 +11,6 @@ const bankIndicatorModel = new schema({
         type: schema.Types.ObjectId,
         required: true,
     },
-    percent: {
-        type: Number,
-        required: true,
-    },
     score_chart: {
         type: Array,
         required: true,
