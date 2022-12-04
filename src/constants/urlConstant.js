@@ -1,4 +1,5 @@
 const urlConstant = {
+    banner: "/banner",
     bank: "/bank",
     indicator: "/indicator",
     bankIndicator: "/bank-indicator",

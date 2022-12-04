@@ -8,6 +8,11 @@ import tokenHelper from "../helpers/tokenHelper"
 
 const userCl = mongoose.model("user", userModel)
 
+function _getUserById({_id})
+{
+    return userCl.findOne({_id})
+}
+
 function addUser(req, res)
 {
     const {username, password} = req.body
@@ -54,7 +59,7 @@ function login(req, res)
 }
 
 const userController = {
-    addUser,
+    _getUserById,
     login,
 }
 

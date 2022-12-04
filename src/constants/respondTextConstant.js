@@ -11,6 +11,8 @@ const respondTextConstant = {
         routeNotFound: "route not found",
 
         loginFailed: "کاربری با اطلاعات ارسالی یافت نشد",
+
+        getPermission: "شما پرمیشن لازم را ندارید",
     },
 }
 
