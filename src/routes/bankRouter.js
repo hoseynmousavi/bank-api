@@ -6,6 +6,8 @@ function bankRouter(app)
     app.route(urlConstant.bank)
         .get(bankController.getList)
         .post(bankController.addItem)
+        .patch(bankController.updateItem)
+        .delete(bankController.remove)
 }
 
 export default bankRouter

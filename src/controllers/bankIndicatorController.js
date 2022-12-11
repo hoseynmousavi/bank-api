@@ -22,22 +22,26 @@ function getList(req, res)
 function addItem(req, res)
 {
     const newItem = new bankIndicatorCL({...req.body, score_chart: JSON.parse(req.body.score_chart)})
-    newItem.save((err, data) =>
-    {
-        if (err)
-        {
-            createErrorText({res, status: 400, message: respondTextConstant.error.createData, detail: err})
-        }
-        else
+    newItem.save()
+        .then(data =>
         {
             createSuccessRespond({res, data, message: respondTextConstant.success.addData})
-        }
-    })
+        })
+        .catch(err =>
+        {
+            createErrorText({res, status: 400, message: respondTextConstant.error.createData, detail: err})
+        })
+}
+
+function _remove(query)
+{
+    return bankIndicatorCL.updateMany(query, {is_deleted: true}, {new: true, useFindAndModify: false, runValidators: true})
 }
 
 const bankIndicatorController = {
     getList,
     addItem,
+    _remove,
 }
 
 export default bankIndicatorController
