@@ -3,6 +3,7 @@ import bankIndicatorModel from "../models/bankIndicatorModel"
 import createErrorText from "../helpers/createErrorText"
 import respondTextConstant from "../constants/respondTextConstant"
 import createSuccessRespond from "../helpers/createSuccessRespond"
+import checkPermission from "../helpers/checkPermission"
 
 const bankIndicatorCL = mongoose.model("bank-indicator", bankIndicatorModel)
 
@@ -21,15 +22,37 @@ function getList(req, res)
 
 function addItem(req, res)
 {
-    const newItem = new bankIndicatorCL({...req.body, score_chart: JSON.parse(req.body.score_chart)})
-    newItem.save()
-        .then(data =>
+    checkPermission({req, res})
+        .then(() =>
         {
-            createSuccessRespond({res, data, message: respondTextConstant.success.addData})
+            const newItem = new bankIndicatorCL({...req.body, score_chart: JSON.parse(req.body.score_chart)})
+            newItem.save()
+                .then(data =>
+                {
+                    createSuccessRespond({res, data, message: respondTextConstant.success.addData})
+                })
+                .catch(err =>
+                {
+                    createErrorText({res, status: 400, message: respondTextConstant.error.createData, detail: err})
+                })
         })
-        .catch(err =>
+}
+
+function updateItem(req, res)
+{
+    checkPermission({req, res})
+        .then(() =>
         {
-            createErrorText({res, status: 400, message: respondTextConstant.error.createData, detail: err})
+            const {_id, data} = req.body
+            bankIndicatorCL.findOneAndUpdate({_id}, {score_chart: JSON.parse(data.score_chart)}, {new: true, useFindAndModify: false, runValidators: true})
+                .then(updated =>
+                {
+                    createSuccessRespond({res, data: updated, message: respondTextConstant.success.updateData})
+                })
+                .catch(err =>
+                {
+                    createErrorText({res, status: 400, message: respondTextConstant.error.updateData, detail: err})
+                })
         })
 }
 
@@ -41,6 +64,7 @@ function _remove(query)
 const bankIndicatorController = {
     getList,
     addItem,
+    updateItem,
     _remove,
 }
 
