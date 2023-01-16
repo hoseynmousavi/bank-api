@@ -7,6 +7,7 @@ function bankRouter(app)
         .get(bankController.getList)
         .post(bankController.addItem)
         .patch(bankController.updateItem)
+        .put(bankController.updateLogo)
         .delete(bankController.remove)
 }
 

@@ -68,6 +68,30 @@ function updateItem(req, res)
         })
 }
 
+function updateLogo(req, res)
+{
+    checkPermission({req, res})
+        .then(() =>
+        {
+            const {_id} = req.body
+            const file = req.files?.file
+
+            saveFile({file, res})
+                .then(logo =>
+                {
+                    bankCL.findOneAndUpdate({_id}, {logo}, {new: true, useFindAndModify: false, runValidators: true})
+                        .then(updated =>
+                        {
+                            createSuccessRespond({res, data: updated, message: respondTextConstant.success.updateData})
+                        })
+                        .catch(err =>
+                        {
+                            createErrorText({res, status: 400, message: respondTextConstant.error.updateData, detail: err})
+                        })
+                })
+        })
+}
+
 function remove(req, res)
 {
     checkPermission({req, res})
@@ -98,6 +122,7 @@ const bankController = {
     getList,
     addItem,
     updateItem,
+    updateLogo,
     remove,
 }
 
